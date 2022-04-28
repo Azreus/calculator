@@ -1,3 +1,14 @@
 body {
   background-color: rgb(75, 75, 75);
 }
+
+.calc-display {
+  width: 200px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: bisque;
+}
+
+button {
+  padding: 10px 20px;
+}

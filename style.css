@@ -4,6 +4,7 @@ body {
 
 .calc-display {
   width: 200px;
+  height: 18px;
   padding: 10px;
   margin-bottom: 10px;
   background-color: bisque;

@@ -28,6 +28,7 @@ function operate(operator, num1, num2) {
 }
 
 let calc_display = document.querySelector('.calc-display');
+calc_display.textContent = '0';
 
 let current_calculation = 0;
 // Follows the format = {num1: 0, operator: '', num2: 0}
@@ -65,6 +66,9 @@ function addNumberEvent(button, digit) {
   button.addEventListener('click', () => {
     if (current_number === '') {
       calc_display.textContent = '';
+    } else if (calc_display.textContent === '0' || current_number === '0') {
+      calc_display.textContent = '';
+      current_number = '';
     }
     calc_display.textContent += digit;
     current_number += digit;
@@ -111,7 +115,7 @@ function addOperatorEvent(button, operator) {
 
 const equals = document.querySelector('.b-equals');
 equals.addEventListener('click', () => {
-  // If there's currently a number but no operator pressed
+  // If there's currently a number but no operator pressed, do nothing
   if (Object.keys(current_expression).length === 0 && !(current_number === '')) {
     return;
   } else if (('num1' in current_expression && 'operator' in current_expression) &&
@@ -133,4 +137,11 @@ equals.addEventListener('click', () => {
   } else {
     calc_display.textContent = current_calculation;
   }
+});
+
+const clear = document.querySelector('.b-clear');
+clear.addEventListener('click', () => {
+  current_expression = {};
+  current_number = '';
+  calc_display.textContent = '0';
 });

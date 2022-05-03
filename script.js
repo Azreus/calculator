@@ -104,6 +104,9 @@ function addOperatorEvent(button, operator) {
       // in current_expression, then sets .num1 with the new calcalution and
       // .operator with the new operator
       current_expression.num2 = Number(current_number);
+      if (checkZeroDivision()) {
+        return;
+      }
       current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
       current_expression.num1 = current_calculation;
       current_expression.operator = operator;
@@ -124,6 +127,9 @@ equals.addEventListener('click', () => {
       current_number === '') {
     // If there's a number and operator but no current number: (num1 operator num1 = )
     current_expression.num2 = current_expression.num1;
+    if (checkZeroDivision()) {
+      return;
+    }
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
     calc_display.textContent = checkNineDigits(current_calculation);
     current_expression = {};
@@ -132,6 +138,9 @@ equals.addEventListener('click', () => {
       !(current_number === '')) {
     // If there's 2 numbers and operator: (num1 operator num2 = )
     current_expression.num2 = Number(current_number);
+    if (checkZeroDivision()) {
+      return;
+    }
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
     calc_display.textContent = checkNineDigits(current_calculation);
     current_expression = {};
@@ -145,6 +154,7 @@ const clear = document.querySelector('.b-clear');
 clear.addEventListener('click', () => {
   current_expression = {};
   current_number = '';
+  current_calculation = 0;
   calc_display.textContent = '0';
 });
 
@@ -154,4 +164,13 @@ function checkNineDigits(num) {
     numString = num.toExponential(4);
   }
   return numString;
+}
+
+function checkZeroDivision() {
+  if (current_expression.operator === '/' && current_expression.num2 === 0) {
+    calc_display.textContent = "Nice try.";
+    current_expression = {};
+    current_number = '';
+    return true;
+  } else { return false }
 }

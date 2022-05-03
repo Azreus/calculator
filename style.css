@@ -3,11 +3,13 @@ body {
 }
 
 .calc-display {
-  width: 200px;
-  height: 18px;
+  width: 325px;
+  height: 75px;
+  font-size: 70px;
   padding: 10px;
   margin-bottom: 10px;
   background-color: bisque;
+  text-align: right;
 }
 
 button {

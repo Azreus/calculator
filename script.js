@@ -30,11 +30,9 @@ function operate(operator, num1, num2) {
 let calc_display = document.querySelector('.calc-display');
 calc_display.textContent = '0';
 
-let current_calculation = 0;
-// Follows the format = {num1: 0, operator: '', num2: 0}
-let current_expression = {};
-// Holds the the current number before the user clicks an operator
-let current_number = '';
+let current_calculation = 0;  // Holds the 'final' answer
+let current_expression = {};  // Follows the format = {num1: 0, operator: '', num2: 0}
+let current_number = '';  // Holds the the current number before the user clicks an operator
 
 //  Adds click event listeners to each numbered button which adds them to the calculator display
 let nums = document.querySelectorAll('.num');
@@ -69,6 +67,8 @@ function addNumberEvent(button, digit) {
     } else if (calc_display.textContent === '0' || current_number === '0') {
       calc_display.textContent = '';
       current_number = '';
+    } else if (calc_display.textContent.length >= 9) {
+      return;
     }
     calc_display.textContent += digit;
     current_number += digit;
@@ -97,6 +97,8 @@ function addOperatorEvent(button, operator) {
       current_expression.num1 = Number(current_number);
       current_expression.operator = operator;
       current_number = '';
+    } else if ('operator' in current_expression && current_number === '') {
+      current_expression.operator = operator;
     } else {
       // Sets .num2 in current_expression and calls operate() with the values
       // in current_expression, then sets .num1 with the new calcalution and
@@ -108,7 +110,7 @@ function addOperatorEvent(button, operator) {
       // Deletes .num2 in current_expression and resets the current_number
       delete current_expression.num2;
       current_number = '';
-      calc_display.textContent = current_calculation;
+      calc_display.textContent = checkNineDigits(current_calculation);
     }
   });
 }
@@ -123,7 +125,7 @@ equals.addEventListener('click', () => {
     // If there's a number and operator but no current number: (num1 operator num1 = )
     current_expression.num2 = current_expression.num1;
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
-    calc_display.textContent = current_calculation;
+    calc_display.textContent = checkNineDigits(current_calculation);
     current_expression = {};
     current_number = '';
   } else if (('num1' in current_expression && 'operator' in current_expression) &&
@@ -131,7 +133,7 @@ equals.addEventListener('click', () => {
     // If there's 2 numbers and operator: (num1 operator num2 = )
     current_expression.num2 = Number(current_number);
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
-    calc_display.textContent = current_calculation;
+    calc_display.textContent = checkNineDigits(current_calculation);
     current_expression = {};
     current_number = '';
   } else {
@@ -145,3 +147,11 @@ clear.addEventListener('click', () => {
   current_number = '';
   calc_display.textContent = '0';
 });
+
+function checkNineDigits(num) {
+  let numString = num.toString();
+  if (numString.length > 9) {
+    numString = num.toExponential(4);
+  }
+  return numString;
+}

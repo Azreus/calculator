@@ -60,6 +60,9 @@ nums.forEach(num => {
   }
 });
 
+const point = document.querySelector('.b-point');
+addNumberEvent(point, '.');
+
 function addNumberEvent(button, digit) {
   button.addEventListener('click', () => {
     if (current_number === '') {
@@ -68,6 +71,8 @@ function addNumberEvent(button, digit) {
       calc_display.textContent = '';
       current_number = '';
     } else if (calc_display.textContent.length >= 9) {
+      return;
+    } else if (digit === '.' && current_number.includes('.')) {
       return;
     }
     calc_display.textContent += digit;

@@ -163,6 +163,12 @@ clear.addEventListener('click', () => {
   calc_display.textContent = '0';
 });
 
+const backspace = document.querySelector('.b-backspace');
+backspace.addEventListener('click', () => {
+  current_number = current_number.slice(0, -1);
+  calc_display.textContent = current_number;
+})
+
 function checkNineDigits(num) {
   let numString = num.toString();
   if (numString.length > 9) {

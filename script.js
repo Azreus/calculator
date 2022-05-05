@@ -65,7 +65,10 @@ addNumberEvent(point, '.');
 
 function addNumberEvent(button, digit) {
   button.addEventListener('click', () => {
-    if (current_number === '') {
+    if (digit === '.' && current_number === '') {
+      calc_display.textContent = '0';
+      current_number += 0;
+    } else if (current_number === '') {
       calc_display.textContent = '';
     } else if (calc_display.textContent === '0' || current_number === '0') {
       calc_display.textContent = '';

@@ -2,14 +2,34 @@ body {
   background-color: rgb(75, 75, 75);
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-container {
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
 .calc-display {
-  width: 325px;
-  height: 75px;
   font-size: 70px;
   padding: 10px;
-  margin-bottom: 10px;
   background-color: bisque;
   text-align: right;
+  grid-column: 1 / 6;
+}
+
+.b-zero {
+  grid-column: 2 / 3;
+}
+
+.b-equals {
+  grid-column: 5 / 6;
 }
 
 button {

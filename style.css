@@ -2,7 +2,34 @@ body {
   background-color: rgb(75, 75, 75);
 }
 
+.bg {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 100vw;
+  height: 100vh;
+}
+
+.bg-item {
+  color: #cccccc;
+  font-size: 60px;
+  margin: auto;
+  text-align: right;
+}
+
 .container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-background {
+  width: 515px;
+  height: 515px;
+  background-color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,14 +43,6 @@ body {
   grid-template-rows: repeat(5, 1fr);
 }
 
-.calc-display {
-  font-size: 70px;
-  padding: 10px;
-  background-color: bisque;
-  text-align: right;
-  grid-column: 1 / 6;
-}
-
 .b-zero {
   grid-column: 2 / 3;
 }
@@ -32,6 +51,66 @@ body {
   grid-column: 5 / 6;
 }
 
+.calc-display {
+  font-size: 70px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  text-align: right;
+  grid-column: 1 / 6;
+  border: 1px solid black;
+}
+
+.operator,
+.b-equals {
+  background-color: #FF9500;
+}
+
+.b-backspace,
+.b-clear {
+  background-color: #505050;
+  color: #FFFFFF;
+}
+
 button {
   padding: 10px 20px;
+  font-size: 20px;
+  background-color: #D4D4D2;
+  border: 1px solid #000000;
+  cursor: pointer;
+}
+
+/* Button hovers */
+
+.num:hover,
+.b-point:hover {
+  background-color: #B5B5B1;
+}
+
+.operator:hover,
+.b-equals:hover {
+  background-color: #D87E00;
+}
+
+.b-backspace:hover,
+.b-clear:hover {
+  background-color: #444444;
+  color: #FFFFFF;
+}
+
+/* Button active */
+
+.num:active,
+.b-point:active {
+  background-color: #969691;
+}
+
+.operator:active,
+.b-equals:active {
+  background-color: #975800;
+}
+
+.b-backspace:active,
+.b-clear:active {
+  background-color: #373737;
+  color: #FFFFFF;
 }

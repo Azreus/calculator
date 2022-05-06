@@ -66,19 +66,20 @@ addNumberEvent(point, '.');
 function addNumberEvent(button, digit) {
   button.addEventListener('click', () => {
     if (digit === '.' && current_number === '') {
-      calc_display.textContent = '0';
+      updateBackground('0');
       current_number += 0;
     } else if (current_number === '') {
-      calc_display.textContent = '';
+      updateBackground('');
     } else if (calc_display.textContent === '0' || current_number === '0') {
-      calc_display.textContent = '';
+      updateBackground('');
       current_number = '';
-    } else if (calc_display.textContent.length >= 9) {
+    } else if (calc_display.textContent.length >= 12) {
       return;
     } else if (digit === '.' && current_number.includes('.')) {
       return;
     }
     calc_display.textContent += digit;
+    bg_items.forEach(item => item.textContent += digit);
     current_number += digit;
   });
 }
@@ -121,7 +122,7 @@ function addOperatorEvent(button, operator) {
       // Deletes .num2 in current_expression and resets the current_number
       delete current_expression.num2;
       current_number = '';
-      calc_display.textContent = checkNineDigits(current_calculation);
+      updateBackground(checkDigits(current_calculation));
     }
   });
 }
@@ -139,7 +140,7 @@ equals.addEventListener('click', () => {
       return;
     }
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
-    calc_display.textContent = checkNineDigits(current_calculation);
+    updateBackground(checkDigits(current_calculation));
     current_expression = {};
     current_number = '';
   } else if (('num1' in current_expression && 'operator' in current_expression) &&
@@ -150,11 +151,11 @@ equals.addEventListener('click', () => {
       return;
     }
     current_calculation = operate(current_expression.operator, current_expression.num1, current_expression.num2);
-    calc_display.textContent = checkNineDigits(current_calculation);
+    updateBackground(checkDigits(current_calculation));
     current_expression = {};
     current_number = '';
   } else {
-    calc_display.textContent = current_calculation;
+    updateBackground(current_calculation);
   }
 });
 
@@ -164,27 +165,37 @@ clear.addEventListener('click', () => {
   current_number = '';
   current_calculation = 0;
   calc_display.textContent = '0';
+  bg_items.forEach(item => item.textContent = '');
 });
 
 const backspace = document.querySelector('.b-backspace');
 backspace.addEventListener('click', () => {
   current_number = current_number.slice(0, -1);
-  calc_display.textContent = current_number;
+  updateBackground(current_number);
 })
 
-function checkNineDigits(num) {
+function checkDigits(num) {
   let numString = num.toString();
-  if (numString.length > 9) {
-    numString = num.toExponential(4);
+  if (numString.length > 12) {
+    numString = num.toExponential(6);
   }
   return numString;
 }
 
 function checkZeroDivision() {
   if (current_expression.operator === '/' && current_expression.num2 === 0) {
-    calc_display.textContent = "Nice try.";
+    updateBackground("Nice try.");
     current_expression = {};
     current_number = '';
     return true;
   } else { return false }
+}
+
+const bg_items = document.querySelectorAll('.bg-item');
+
+function updateBackground(string) {
+  calc_display.textContent = string;
+  bg_items.forEach(item => {
+    item.textContent = string;
+  });
 }

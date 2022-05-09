@@ -168,6 +168,7 @@ clear.addEventListener('click', () => {
   current_number = '';
   current_calculation = 0;
   calc_display.textContent = '0';
+  calc_display_exp.textContent = '';
   bg_items.forEach(item => item.textContent = '');
 });
 

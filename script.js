@@ -29,6 +29,7 @@ function operate(operator, num1, num2) {
 
 let calc_display = document.querySelector('.calc-display');
 calc_display.textContent = '0';
+let calc_display_exp = document.querySelector('.calc-display-exp');
 
 let current_calculation = 0;  // Holds the 'final' answer
 let current_expression = {};  // Follows the format = {num1: 0, operator: '', num2: 0}
@@ -124,6 +125,7 @@ function addOperatorEvent(button, operator) {
       current_number = '';
       updateBackground(checkDigits(current_calculation));
     }
+    calc_display_exp.textContent = `${current_expression.num1} ${current_expression.operator}`;
   });
 }
 
@@ -157,6 +159,7 @@ equals.addEventListener('click', () => {
   } else {
     updateBackground(current_calculation);
   }
+  calc_display_exp.textContent = '';
 });
 
 const clear = document.querySelector('.b-clear');

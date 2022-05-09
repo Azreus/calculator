@@ -40,7 +40,7 @@ body {
   height: 500px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: 25px repeat(5, 1fr);
 }
 
 .b-zero {
@@ -51,13 +51,25 @@ body {
   grid-column: 5 / 6;
 }
 
+.calc-display-exp {
+  font-size: 15px;
+  padding: 5px 5px 0px 5px;
+  background-color: #FFFFFF;
+  text-align: right;
+  grid-column: 1 / 6;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+}
+
 .calc-display {
   font-size: 70px;
   padding: 10px;
   background-color: #FFFFFF;
   text-align: right;
   grid-column: 1 / 6;
-  border: 1px solid black;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
 }
 
 .operator,

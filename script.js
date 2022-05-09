@@ -188,8 +188,10 @@ function checkDigits(num) {
 function checkZeroDivision() {
   if (current_expression.operator === '/' && current_expression.num2 === 0) {
     updateBackground("Nice try.");
+    current_calculation = 0;
     current_expression = {};
     current_number = '';
+    calc_display_exp.textContent = '';
     return true;
   } else { return false }
 }

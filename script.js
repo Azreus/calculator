@@ -173,8 +173,15 @@ clear.addEventListener('click', () => {
 
 const backspace = document.querySelector('.b-backspace');
 backspace.addEventListener('click', () => {
-  current_number = current_number.slice(0, -1);
-  updateBackground(current_number);
+  if (current_number === '') {
+    return;
+  } else {
+    current_number = current_number.slice(0, -1);
+    if (current_number === '') {
+      current_number = '0';
+    }
+    updateBackground(current_number);
+  }
 })
 
 function checkDigits(num) {

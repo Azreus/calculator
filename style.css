@@ -1,3 +1,7 @@
+* {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 body {
   background-color: rgb(75, 75, 75);
 }
@@ -57,12 +61,13 @@ body {
   background-color: #FFFFFF;
   text-align: right;
   grid-column: 1 / 6;
+  border-top: 1px solid #000000;
   border-left: 1px solid #000000;
   border-right: 1px solid #000000;
 }
 
 .calc-display {
-  font-size: 70px;
+  font-size: 65px;
   padding: 10px;
   background-color: #FFFFFF;
   text-align: right;
